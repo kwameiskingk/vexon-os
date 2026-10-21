@@ -1,0 +1,1 @@
+ALTER TABLE gtm_sender_accounts ADD COLUMN IF NOT EXISTS heyreach_sender_id bigint;

@@ -1,0 +1,91 @@
+project_id = "vexon-os"
+
+[functions.setters]
+verify_jwt = false
+
+[functions.setter-metrics]
+verify_jwt = false
+
+[functions.call-scores]
+verify_jwt = false
+
+[functions.call-scores-check]
+verify_jwt = false
+
+[functions.call-scores-fetch]
+verify_jwt = false
+
+# Acquisition qualification scoring (n8n workflow, no JWT); auth is the
+# fail-closed N8N_WEBHOOK_SECRET check inside each function.
+[functions.acq-meetings-today]
+verify_jwt = false
+
+[functions.acq-qual-check]
+verify_jwt = false
+
+[functions.acq-qual-scores]
+verify_jwt = false
+
+# acq-rescan-range is DELIBERATELY absent from this file: it is called from the
+# browser by a signed-in admin/ops/sdr_manager, so it keeps the default
+# verify_jwt = true and does its own role check. Do NOT add verify_jwt = false
+# for it — that would make a Close-hammering backfill publicly callable.
+
+[functions.smartlead-webhook]
+verify_jwt = false
+
+[functions.smartlead-api]
+verify_jwt = false
+
+# Jotform webhook — can't send a JWT; auth is the fail-closed
+# CANDIDATE_INTAKE_SECRET check inside the function (Batch 3, audit fix).
+[functions.candidate-assessments-intake]
+verify_jwt = false
+
+# CV screening agent dual-write from run_parallel.py (external script,
+# no JWT); auth is the fail-closed CV_SCREENING_INGEST_SECRET check
+# inside the function.
+[functions.cv-screening-ingest]
+verify_jwt = false
+
+# Public booking page (/bookings/<slug>): prospects book themselves in from
+# the meta-ads funnel with no login. Scope is deliberately narrow — active
+# event types by slug only, host emails never returned, requested slots
+# re-validated server-side, honeypot field, DB exclusion constraint against
+# double-booking. booking-availability / booking-create /
+# booking-connections-status are DELIBERATELY absent from this file. NOTE:
+# the deploy pipeline ships every function with platform JWT verification
+# OFF regardless of this file, so the staff booking functions enforce their
+# caller IN CODE (auth.getUser / anon-bearer gate) — the create-user
+# precedent. This file's verify_jwt entries document intent for CLI deploys.
+[functions.booking-public]
+verify_jwt = false
+
+# Client calendar connection (/connect-calendar): clients arrive from a
+# branded email with a one-off token — no Vexon OS login exists for them.
+# Token-gated in code; Google's OAuth callback also lands here (GET).
+# booking-client-admin is deliberately absent (staff JWT enforced in code).
+[functions.booking-client-connect]
+verify_jwt = false
+
+# Forgot-password (public by definition — the caller is locked out). Always
+# returns a generic success; recovery link only mails an existing account.
+[functions.client-password-reset]
+verify_jwt = false
+
+# client-onboarding / client-onboarding-admin are deliberately absent:
+# both enforce their caller in code (signed-in client linked to the journey,
+# or staff tier dev/admin/ops/csm).
+
+# Typeform webhook for the Meta-ads funnel (Marketing Hub lead intake).
+# Typeform calls this with no JWT; auth is the TYPEFORM_WEBHOOK_SECRET check
+# (HMAC signature or ?secret= param) inside the function.
+[functions.marketing-lead-intake]
+verify_jwt = false
+
+[functions.form-submit]
+verify_jwt = false
+
+# PandaDoc calls this with no login; the shared-key signature is checked in code.
+[functions.pandadoc-onboarding-webhook]
+verify_jwt = false

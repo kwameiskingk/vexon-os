@@ -1,0 +1,2 @@
+ALTER TABLE public.setters_profiles DROP CONSTRAINT IF EXISTS setters_profiles_title_check;
+ALTER TABLE public.setters_profiles ADD CONSTRAINT setters_profiles_title_check CHECK (title IN ('trainee_sdr', 'sdr', 'lead_sdr', 'senior_sdr'));

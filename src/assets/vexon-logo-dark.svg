@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 160" width="600" height="160" shape-rendering="geometricPrecision">
+<defs><linearGradient id="vexon-logo-d-grad" x1="0" y1="0" x2="0.35" y2="1"><stop offset="0" stop-color="#dedede"/><stop offset="0.5" stop-color="#9e9e9e"/><stop offset="1" stop-color="#4e4e4e"/></linearGradient><mask id="vexon-logo-d-mask"><rect width="128" height="128" fill="#fff"/><line x1="96" y1="22" x2="64" y2="106" stroke="#000" stroke-width="24"/></mask></defs>
+<g transform="translate(8 16) scale(1)">
+<line x1="56" y1="22" x2="104" y2="106" stroke="#8c8c8c" stroke-width="14" mask="url(#vexon-logo-d-mask)"/>
+      <polyline points="24,22 64,106 104,22" fill="none" stroke="url(#vexon-logo-d-grad)" stroke-width="14" stroke-linejoin="miter" stroke-miterlimit="6"/>
+</g>
+<g font-family="'Helvetica Neue', Helvetica, Arial, sans-serif" fill="#111113">
+  <text x="156" y="92" font-size="64" font-weight="700" letter-spacing="7">VEXON</text>
+  <text x="159" y="132" font-size="28" font-weight="500" letter-spacing="14" opacity="0.75">OS</text>
+</g>
+</svg>

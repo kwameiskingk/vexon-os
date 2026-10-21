@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128" shape-rendering="geometricPrecision">
+<defs><linearGradient id="vexon-mark-grad" x1="0" y1="0" x2="0.35" y2="1"><stop offset="0" stop-color="#dedede"/><stop offset="0.5" stop-color="#9e9e9e"/><stop offset="1" stop-color="#4e4e4e"/></linearGradient><mask id="vexon-mark-mask"><rect width="128" height="128" fill="#fff"/><line x1="96" y1="22" x2="64" y2="106" stroke="#000" stroke-width="24"/></mask></defs>
+<line x1="56" y1="22" x2="104" y2="106" stroke="#8c8c8c" stroke-width="14" mask="url(#vexon-mark-mask)"/>
+      <polyline points="24,22 64,106 104,22" fill="none" stroke="url(#vexon-mark-grad)" stroke-width="14" stroke-linejoin="miter" stroke-miterlimit="6"/>
+</svg>

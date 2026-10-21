@@ -1,0 +1,2 @@
+ALTER TABLE public.morning_team_goals DROP CONSTRAINT IF EXISTS morning_team_goals_goal_type_check;
+ALTER TABLE public.morning_team_goals ADD CONSTRAINT morning_team_goals_goal_type_check CHECK (goal_type = ANY (ARRAY['weekly_meetings'::text, 'weekly_sat_meetings'::text, 'monthly_sat_meetings'::text, 'monthly_cash'::text]));

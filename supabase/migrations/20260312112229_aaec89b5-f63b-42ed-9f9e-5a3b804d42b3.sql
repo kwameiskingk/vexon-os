@@ -1,0 +1,2 @@
+ALTER TABLE public.employee_attendance DROP CONSTRAINT employee_attendance_status_check;
+ALTER TABLE public.employee_attendance ADD CONSTRAINT employee_attendance_status_check CHECK (status IN ('present', 'late', 'half_day'));

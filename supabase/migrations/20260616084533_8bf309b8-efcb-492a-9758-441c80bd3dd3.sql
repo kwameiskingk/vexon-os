@@ -1,0 +1,41 @@
+DO $$
+DECLARE
+  v_user_id uuid := '344adadd-9fb8-4a18-8baa-27439ce040ea';
+  v_user_id_t text := '344adadd-9fb8-4a18-8baa-27439ce040ea';
+  v_setter_id uuid := '37a7b089-e4d1-4f92-85ad-f28d1412b006';
+  v_setter_id_t text := '37a7b089-e4d1-4f92-85ad-f28d1412b006';
+  v_email text := 'hannah@meridiansales.example';
+BEGIN
+  DELETE FROM public.meetings WHERE setter_id::text = v_setter_id_t;
+  DELETE FROM public.performance WHERE setter_id::text = v_setter_id_t OR user_id::text = v_user_id_t OR LOWER(email) = v_email;
+  DELETE FROM public.performance_history WHERE setter_id::text = v_setter_id_t OR user_id::text = v_user_id_t OR LOWER(email) = v_email;
+  DELETE FROM public.invoice_submissions WHERE user_id::text = v_user_id_t;
+  DELETE FROM public.setter_client_assignments WHERE setter_id::text = v_setter_id_t;
+  DELETE FROM public.setter_weekly_goals WHERE created_by::text = v_user_id_t;
+  DELETE FROM public.setter_feedback WHERE setter_id::text = v_setter_id_t OR LOWER(email) = v_email;
+  DELETE FROM public.sdr_daily_metrics WHERE user_id::text = v_user_id_t;
+  DELETE FROM public.daily_metrics WHERE user_id::text = v_user_id_t;
+  DELETE FROM public.start_of_day_submissions WHERE user_id::text = v_user_id_t;
+  DELETE FROM public.hourly_updates WHERE user_id::text = v_user_id_t;
+  DELETE FROM public.midday_reports WHERE user_id::text = v_user_id_t;
+  DELETE FROM public.objection_reports WHERE setter_id::text = v_setter_id_t;
+  DELETE FROM public.leaderboard_awards WHERE LOWER(email) = v_email;
+  DELETE FROM public.leaderboard_achievements WHERE LOWER(email) = v_email;
+  DELETE FROM public.manual_daily_metrics WHERE target_user_id::text IN (v_setter_id_t, v_user_id_t) OR entered_by::text = v_user_id_t;
+  DELETE FROM public.user_achievement_progress WHERE user_id::text IN (v_setter_id_t, v_user_id_t) OR LOWER(email) = v_email;
+  DELETE FROM public.user_roles WHERE user_id = v_user_id;
+  DELETE FROM public.user_department_access WHERE user_id = v_user_id;
+  DELETE FROM public.user_tab_restrictions WHERE user_id = v_user_id;
+  DELETE FROM public.notifications WHERE recipient_id = v_user_id OR triggered_by = v_user_id;
+  DELETE FROM public.employee_attendance WHERE employee_id::text = v_setter_id_t;
+  DELETE FROM public.employee_leave_requests WHERE user_id::text = v_user_id_t OR LOWER(email) = v_email;
+  DELETE FROM public.employee_documents WHERE user_id::text = v_user_id_t OR employee_id::text = v_setter_id_t;
+  DELETE FROM public.employee_payslips WHERE user_id::text = v_user_id_t OR employee_id::text = v_setter_id_t;
+  DELETE FROM public.task_assignments WHERE assigned_user_id = v_user_id OR created_by = v_user_id;
+  DELETE FROM public.task_instances WHERE assigned_to_user_id = v_user_id;
+  DELETE FROM public.responsibility_checkins WHERE user_id = v_user_id;
+  DELETE FROM public.admin_messages WHERE sender_id = v_user_id OR recipient_id = v_user_id;
+  DELETE FROM public.setters_profiles WHERE id = v_setter_id OR user_id = v_user_id OR LOWER(email) = v_email;
+  DELETE FROM public.profiles WHERE id = v_user_id OR LOWER(email) = v_email;
+  DELETE FROM auth.users WHERE id = v_user_id;
+END $$;

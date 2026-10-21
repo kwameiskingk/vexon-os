@@ -1,0 +1,1 @@
+UPDATE performance SET meetings_booked = 0 WHERE email = 'ricardo@meridiansales.example' AND date = '2026-03-10' AND meetings_booked = 1;

@@ -1,0 +1,1 @@
+UPDATE enrichment_requests SET status = 'enriched' WHERE status = 'enriching' AND created_at < NOW() - INTERVAL '10 minutes';

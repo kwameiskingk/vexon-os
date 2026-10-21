@@ -1,0 +1,1 @@
+UPDATE public.midday_report_settings SET enabled = false, target_roles = '{}';

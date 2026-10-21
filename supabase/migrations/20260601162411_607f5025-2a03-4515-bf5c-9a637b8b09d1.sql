@@ -1,0 +1,1 @@
+ALTER VIEW public.setters_profiles_safe SET (security_invoker = true);

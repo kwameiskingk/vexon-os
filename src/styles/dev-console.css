@@ -1,0 +1,337 @@
+/* Dev Centre and the Kronos module (CEO, Ops Command).
+   15 Oct 2026 (UI pass): the console now speaks the app's design system.
+   Every dc-* token maps onto the kit tokens in index.css, so dark and light
+   follow the app theme with no second palette: flat surfaces, hairlines,
+   Instrument Sans for UI, IBM Plex Mono for labels and figures, the brand
+   gradient only on the rail bar, the primary button and the hero figure. */
+
+.dev-console {
+  --dc-bg: var(--bg);
+  --dc-surface: var(--surf);
+  --dc-surface-2: var(--surf2);
+  --dc-border: var(--line);
+  --dc-border-strong: var(--line2);
+  --dc-text: var(--ink);
+  --dc-text-dim: var(--dim);
+  --dc-cyan: var(--brand-blue);
+  --dc-violet: var(--accent);
+  --dc-pink: var(--brand-pink);
+  --dc-amber: var(--warn);
+  --dc-red: var(--bad);
+  --dc-green: var(--ok);
+  --dc-grad: var(--grad);
+  --dc-grad-deep: var(--grad);
+  --dc-grad-rail: var(--grad);
+  --dc-shadow: none;
+  --dc-shadow-inset: none;
+
+  background: var(--dc-bg);
+  color: var(--dc-text);
+  font-family: 'Instrument Sans', system-ui, sans-serif;
+  min-height: 100vh;
+  position: relative;
+}
+
+.dev-console > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* Embedded inside a normal dashboard page (CEO · Kronos, Ops Command · Kronos):
+   part of the page, not a card. */
+.dev-console.dc-embedded {
+  min-height: 0;
+  border-radius: 0;
+  border: 0;
+  padding: 0;
+  box-shadow: none;
+  background: transparent;
+}
+
+.dc-mono {
+  font-family: 'IBM Plex Mono', ui-monospace, monospace;
+  font-variant-numeric: tabular-nums;
+}
+
+.dc-mono.text-\[var\(--dc-text-dim\)\] { color: var(--dc-text-dim); }
+
+/* A surface is a section: a rule above, no box. */
+.dc-surface {
+  background: transparent;
+  border: 0;
+  border-top: 1px solid var(--dc-border);
+  border-radius: 0;
+  box-shadow: none;
+}
+
+/* The one tonal step: facts strips, list items in the Dev Centre. */
+.dc-surface-2 {
+  background: var(--dc-surface-2);
+  border: 0;
+  border-radius: 8px;
+}
+
+.dc-surface-accent {
+  position: relative;
+  overflow: hidden;
+}
+.dc-surface-accent::before {
+  content: '';
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 2px;
+  background: var(--dc-grad);
+}
+
+.dc-pill,
+.dc-pill-ok, .dc-pill-warn, .dc-pill-err, .dc-pill-info, .dc-pill-dim {
+  display: inline-flex;
+  align-items: center;
+  font-family: 'IBM Plex Mono', ui-monospace, monospace;
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 2px 6px;
+  border-radius: 4px;
+  border: 0;
+  background: color-mix(in srgb, currentColor 14%, transparent);
+}
+
+.dc-pill-ok { color: var(--dc-green); }
+.dc-pill-warn { color: var(--dc-amber); }
+.dc-pill-err { color: var(--dc-red); }
+.dc-pill-info { color: var(--dc-violet); }
+.dc-pill-dim { color: var(--dc-text-dim); }
+
+.dc-chip-gradient {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: 'IBM Plex Mono', ui-monospace, monospace;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 3px 8px;
+  border-radius: 4px;
+  color: var(--accent-ink);
+  background: var(--dc-grad);
+  box-shadow: none;
+}
+
+.dc-dot {
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: currentColor;
+  box-shadow: none;
+  animation: dc-pulse 2s ease-in-out infinite;
+}
+
+@keyframes dc-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
+
+.dc-cursor::after {
+  content: "_";
+  animation: dc-blink 1s steps(2) infinite;
+  color: var(--dc-pink);
+}
+
+@keyframes dc-blink {
+  50% { opacity: 0; }
+}
+
+/* Left rail: the 2px gradient bar is the only ornament. */
+.dc-rail {
+  position: relative;
+  background: transparent;
+}
+.dc-rail::before {
+  content: '';
+  position: absolute;
+  top: 0; bottom: 0; left: 0;
+  width: 2px;
+  background: var(--dc-grad-rail);
+  box-shadow: none;
+}
+
+.dc-rail-title {
+  font-family: 'Bricolage Grotesque', 'Instrument Sans', system-ui, sans-serif;
+  font-weight: 500;
+  font-size: 18px;
+  letter-spacing: -0.01em;
+  color: var(--dc-text);
+}
+
+.dc-rail-btn {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding: 7px 10px;
+  border-radius: 6px;
+  font-family: 'Instrument Sans', system-ui, sans-serif;
+  font-size: 13px;
+  letter-spacing: 0;
+  text-transform: none;
+  color: var(--dc-text-dim);
+  border: 0;
+  transition: color 120ms ease, background 120ms ease;
+  cursor: pointer;
+  background: transparent;
+  text-align: left;
+  position: relative;
+}
+
+.dc-rail-btn:hover {
+  color: var(--dc-text);
+  background: var(--dc-surface-2);
+}
+
+.dc-rail-btn.active {
+  color: var(--dc-text);
+  background: var(--dc-surface-2);
+  box-shadow: none;
+}
+.dc-rail-btn.active::before {
+  content: '';
+  position: absolute;
+  left: -8px; top: 6px; bottom: 6px;
+  width: 2px;
+  border-radius: 999px;
+  background: var(--dc-grad-rail);
+}
+.dc-rail-btn.active svg { color: var(--brand-lilac); }
+
+.dc-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  font-family: 'Instrument Sans', system-ui, sans-serif;
+  font-size: 12.5px;
+  font-weight: 600;
+  text-transform: none;
+  letter-spacing: 0;
+  border-radius: 6px;
+  border: 1px solid var(--dc-border-strong);
+  background: transparent;
+  color: var(--dc-text);
+  cursor: pointer;
+  transition: border-color 120ms ease, color 120ms ease;
+  box-shadow: none;
+}
+
+.dc-btn:hover { border-color: var(--dc-violet); color: var(--dc-text); }
+.dc-btn:disabled { opacity: 0.5; cursor: default; }
+.dc-btn-primary {
+  border-color: transparent;
+  color: var(--accent-ink);
+  font-weight: 700;
+  background: var(--dc-grad);
+  box-shadow: none;
+}
+.dc-btn-primary:hover { color: var(--accent-ink); filter: brightness(1.05); transform: none; }
+.dc-btn-danger { border-color: color-mix(in srgb, var(--dc-red) 50%, transparent); color: var(--dc-red); }
+.dc-btn-danger:hover { border-color: var(--dc-red); color: var(--dc-red); }
+
+.dc-input,
+.dc-textarea,
+.dc-select {
+  background: transparent;
+  border: 0;
+  border-bottom: 1px solid var(--dc-border-strong);
+  border-radius: 0;
+  padding: 6px 0;
+  font-family: 'Instrument Sans', system-ui, sans-serif;
+  font-size: 12.5px;
+  color: var(--dc-text);
+  width: 100%;
+  box-shadow: none;
+}
+.dc-select { padding-right: 20px; }
+.dc-textarea { border: 1px solid var(--dc-border-strong); border-radius: 8px; padding: 8px 10px; }
+
+.dc-input:focus,
+.dc-textarea:focus,
+.dc-select:focus {
+  outline: none;
+  border-color: var(--dc-violet);
+  box-shadow: none;
+}
+
+.dc-label {
+  font-family: 'IBM Plex Mono', ui-monospace, monospace;
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--dc-text-dim);
+  margin-bottom: 4px;
+  display: block;
+}
+
+/* Figures in the display face */
+.dc-metric-num {
+  font-family: 'Bricolage Grotesque', 'Instrument Sans', system-ui, sans-serif;
+  font-size: 28px;
+  font-weight: 450;
+  letter-spacing: -0.03em;
+  font-variant-numeric: tabular-nums;
+  color: var(--dc-text);
+}
+.dc-metric-gradient {
+  background: var(--dc-grad);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.dc-divider {
+  height: 1px;
+  background: var(--dc-border);
+  margin: 16px 0;
+}
+
+.dc-track {
+  background: var(--surf3);
+}
+
+/* ============================================================
+   .dc-embed — shadcn/app components rendered inside the Dev
+   Centre. They are restyled globally now; this only keeps the
+   console's mono labels on them.
+   ============================================================ */
+
+.dc-embed .text-muted-foreground { color: var(--dc-text-dim) !important; }
+
+.dc-embed label,
+.dc-embed [class*="Label"] {
+  font-family: 'IBM Plex Mono', ui-monospace, monospace;
+  font-size: 10px !important;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--dc-text-dim) !important;
+}
+
+.dc-embed thead,
+.dc-embed th {
+  background: transparent !important;
+  font-family: 'IBM Plex Mono', ui-monospace, monospace;
+  font-size: 10px !important;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--dc-text-dim) !important;
+}
+
+.dc-embed [class*="rounded-full"][class*="px-"],
+.dc-embed .badge {
+  font-family: 'IBM Plex Mono', ui-monospace, monospace !important;
+  font-size: 10px !important;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}

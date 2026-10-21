@@ -1,0 +1,1 @@
+ALTER TABLE public.gtm_heyreach_events ADD COLUMN IF NOT EXISTS sentiment text;

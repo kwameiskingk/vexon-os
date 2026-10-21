@@ -1,0 +1,1 @@
+ALTER TABLE public.meetings ADD COLUMN IF NOT EXISTS google_meet_link TEXT;

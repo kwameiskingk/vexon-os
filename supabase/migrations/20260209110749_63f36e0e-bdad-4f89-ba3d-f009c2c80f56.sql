@@ -1,0 +1,1 @@
+ALTER TABLE public.setter_feedback ADD COLUMN IF NOT EXISTS emails_sent_today integer;

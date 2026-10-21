@@ -1,0 +1,12 @@
+GRANT SELECT ON public.backfill_setter_telemetry TO authenticated;
+GRANT SELECT ON public.backfill_pitch_calls TO authenticated;
+GRANT SELECT ON public.backfill_sales_discovery_logs TO authenticated;
+GRANT SELECT ON public.backfill_discovery_logs TO authenticated;
+GRANT SELECT ON public.backfill_meetings TO authenticated;
+GRANT SELECT ON public.backfill_clients TO authenticated;
+GRANT ALL ON public.backfill_setter_telemetry TO service_role;
+GRANT ALL ON public.backfill_pitch_calls TO service_role;
+GRANT ALL ON public.backfill_sales_discovery_logs TO service_role;
+GRANT ALL ON public.backfill_discovery_logs TO service_role;
+GRANT ALL ON public.backfill_meetings TO service_role;
+GRANT ALL ON public.backfill_clients TO service_role;

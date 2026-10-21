@@ -1,0 +1,1 @@
+ALTER TABLE public.client_receipts ADD COLUMN IF NOT EXISTS document_category text NOT NULL DEFAULT 'receipt';

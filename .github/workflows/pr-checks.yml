@@ -1,0 +1,42 @@
+# PR gate (quality plan, 6 Oct 2026). Runs on every pull request into main:
+# install, build, the real typecheck (tsconfig.app.json; the root tsconfig
+# checks nothing), lint on the files the PR touches with no new problem
+# classes versus the base branch (which covers no new `any`, by count).
+# the hosted builder commits straight to main; nothing here runs on those pushes.
+name: PR checks
+
+on:
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: pr-checks-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  checks:
+    name: build, typecheck, lint delta
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install (lockfile, no the hosted builder postinstall rewrite matters here)
+        run: npm ci
+
+      - name: Build
+        run: npm run build
+
+      - name: Typecheck (the real one)
+        run: node_modules/.bin/tsc --noEmit -p tsconfig.app.json
+
+      - name: Lint delta on changed files
+        run: node .github/scripts/lint-delta.mjs "origin/${{ github.base_ref }}"

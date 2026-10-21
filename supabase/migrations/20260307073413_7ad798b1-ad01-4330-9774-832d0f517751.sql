@@ -1,0 +1,1 @@
+ALTER TABLE public.leads ADD COLUMN close_lead_id TEXT DEFAULT NULL;

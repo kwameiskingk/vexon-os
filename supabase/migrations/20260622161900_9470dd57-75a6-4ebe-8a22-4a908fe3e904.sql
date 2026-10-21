@@ -1,0 +1,2 @@
+ALTER TABLE public.meetings ADD COLUMN IF NOT EXISTS logged_by_manager_id uuid REFERENCES auth.users(id) ON DELETE SET NULL;
+CREATE INDEX IF NOT EXISTS meetings_logged_by_manager_id_idx ON public.meetings(logged_by_manager_id);

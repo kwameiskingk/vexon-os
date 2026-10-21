@@ -1,0 +1,1 @@
+ALTER TABLE public.team_bulletins REPLICA IDENTITY FULL;

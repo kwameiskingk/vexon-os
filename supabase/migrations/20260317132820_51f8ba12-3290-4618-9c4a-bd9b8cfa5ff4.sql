@@ -1,0 +1,1 @@
+ALTER TABLE public.meetings ADD COLUMN lead_type TEXT DEFAULT 'video_conference' CHECK (lead_type IN ('video_conference', 'mobile_phone_call', 'terms_sent'));

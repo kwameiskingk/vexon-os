@@ -1,0 +1,1 @@
+ALTER TABLE public.setters_profiles DISABLE ROW LEVEL SECURITY;

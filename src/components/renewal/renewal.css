@@ -1,0 +1,790 @@
+/* Renewal ROI presenter — CSS transposed directly from the signed-off
+   artefact (docs/renewals/renewal-roi-presenter.html), every rule scoped
+   under .renewal-scope so this palette cannot leak into the rest of the
+   client profile. Values are the artefact's own, not approximations. */
+
+@import url("https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,300;6..72,400;6..72,500;6..72,600&family=Inter+Tight:wght@400;500;600;700&display=swap");
+
+.renewal-scope {
+  --ink: #0b0a12;
+  --graphite: #565169;
+  --mute: #8b86a2;
+  --paper: #f5f5f6;
+  --card: #ffffff;
+  --rule: #e7e1f7;
+  --rule-strong: #cec5e8;
+
+  --violet: #6b36f5;
+  --violet-deep: #3d5a80;
+  --violet-light: #9e9e9e;
+  --violet-soft: #EEE6F9;
+  --violet-tint: #f7f7f8;
+  --gradient: linear-gradient(90deg, #6b7a90 0%, #9e9e9e 55%, #dedede 100%);
+
+  --serif: "Newsreader", Georgia, "Times New Roman", serif;
+  --sans: "Inter Tight", -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--sans);
+  font-size: 16px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  border-radius: 8px;
+}
+
+.renewal-scope *,
+.renewal-scope *::before,
+.renewal-scope *::after {
+  box-sizing: border-box;
+}
+
+.renewal-scope .wrap {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 48px 32px 72px;
+}
+
+/* ---------- Header ---------- */
+
+.renewal-scope .masthead {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 32px;
+  padding-bottom: 22px;
+  position: relative;
+}
+
+.renewal-scope .masthead::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 3px;
+  background: var(--gradient);
+  border-radius: 2px;
+}
+
+.renewal-scope .eyebrow {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--violet);
+  margin: 0 0 10px;
+}
+
+.renewal-scope .masthead h1 {
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: clamp(30px, 4vw, 44px);
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+  margin: 0;
+  color: var(--ink); /* app heading rules force theme colour — pin the artefact's */
+}
+
+.renewal-scope .period {
+  font-size: 13px;
+  color: var(--graphite);
+  margin: 10px 0 0;
+  line-height: 1.5;
+}
+
+.renewal-scope .brandmark {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--sans);
+  font-weight: 700;
+  font-size: 19px;
+  letter-spacing: -0.02em;
+  margin: 0;
+}
+
+.renewal-scope .brandmark .chip {
+  width: 18px;
+  height: 18px;
+  border-radius: 4px;
+  background: var(--gradient);
+  flex: 0 0 auto;
+}
+
+.renewal-scope .brandmark span {
+  color: var(--violet);
+}
+
+.renewal-scope .prepared {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--mute);
+  margin: 0 0 8px;
+  text-align: right;
+}
+
+/* ---------- Controls ---------- */
+
+.renewal-scope .controls {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  padding: 20px 0 26px;
+}
+
+.renewal-scope .segmented {
+  display: inline-flex;
+  background: #fff;
+  border: 1px solid var(--rule);
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.renewal-scope .segmented button {
+  appearance: none;
+  border: 0;
+  background: transparent;
+  font-family: var(--sans);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--graphite);
+  padding: 9px 18px;
+  cursor: pointer;
+  border-right: 1px solid var(--rule);
+}
+
+.renewal-scope .segmented button:last-child {
+  border-right: 0;
+}
+
+.renewal-scope .segmented button:hover {
+  color: var(--violet);
+  background: var(--violet-tint);
+}
+
+.renewal-scope .segmented button[aria-pressed="true"] {
+  background: var(--violet);
+  color: #fff;
+}
+
+.renewal-scope .seg-label {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--mute);
+  margin-right: 12px;
+}
+
+.renewal-scope .ghost-btn {
+  appearance: none;
+  background: transparent;
+  border: 1px solid var(--rule-strong);
+  border-radius: 3px;
+  font-family: var(--sans);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--violet-deep);
+  padding: 9px 16px;
+  cursor: pointer;
+}
+
+.renewal-scope .ghost-btn:hover {
+  background: #fff;
+  border-color: var(--violet);
+}
+
+.renewal-scope button:focus-visible,
+.renewal-scope input:focus-visible,
+.renewal-scope textarea:focus-visible {
+  outline: 2px solid var(--violet);
+  outline-offset: 2px;
+}
+
+/* ---------- Input panel ---------- */
+
+.renewal-scope .panel {
+  background: #fff;
+  border: 1px solid var(--rule);
+  border-radius: 4px;
+  padding: 26px 28px 28px;
+  margin-bottom: 34px;
+}
+
+.renewal-scope .panel h2 {
+  font-family: var(--sans);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--mute);
+  margin: 0 0 20px;
+  line-height: 1.5;
+}
+
+.renewal-scope .fields {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 18px 24px;
+}
+
+.renewal-scope .field label {
+  display: block;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--graphite);
+  margin-bottom: 6px;
+  /* The app's global `label` rule sets an unloaded "Inter" family (falls back
+     to the system font — wider, so long labels wrapped and misaligned their
+     inputs) and +0.03em tracking. Pin the artefact's own values. */
+  font-family: var(--sans);
+  letter-spacing: normal;
+  line-height: 1.5;
+}
+
+.renewal-scope .field input {
+  width: 100%;
+  font-family: var(--sans);
+  font-size: 15px;
+  color: var(--ink);
+  padding: 9px 11px;
+  border: 1px solid var(--rule-strong);
+  border-radius: 3px;
+  background: #fff;
+}
+
+.renewal-scope .field input:hover {
+  border-color: var(--violet-light);
+}
+
+.renewal-scope .field .hint {
+  display: block;
+  font-size: 11px;
+  color: var(--mute);
+  margin-top: 5px;
+}
+
+/* Vexon OS addition: per-field "last edited" marker for persisted manual
+   fields, styled to the artefact's hint idiom. Stale = > 30 days old. */
+.renewal-scope .field .edited {
+  display: block;
+  font-size: 11px;
+  color: var(--mute);
+  margin-top: 5px;
+  font-style: italic;
+}
+
+.renewal-scope .field .edited--stale {
+  color: #b45309;
+  font-style: italic;
+}
+
+/* ---------- Scenario cards ---------- */
+
+.renewal-scope .scenarios {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.renewal-scope .card {
+  background: var(--card);
+  border: 1px solid var(--rule);
+  border-radius: 4px;
+  padding: 26px 26px 0;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+}
+
+.renewal-scope .card--lead {
+  border-color: var(--violet);
+  background: linear-gradient(180deg, var(--violet-tint) 0%, #fff 220px);
+}
+
+.renewal-scope .card--lead::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: var(--gradient);
+}
+
+.renewal-scope .tag {
+  display: inline-block;
+  font-family: var(--sans); /* app global `.tag` rule would leak its family */
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  padding: 4px 8px;
+  border-radius: 3px;
+  background: var(--violet-soft);
+  color: var(--violet-deep);
+}
+
+.renewal-scope .card--actual .tag {
+  background: var(--ink);
+  color: #fff;
+}
+
+.renewal-scope .card--lead .tag {
+  background: var(--violet);
+  color: #fff;
+}
+
+.renewal-scope .card h3 {
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: 23px;
+  line-height: 1.2;
+  margin: 14px 0 4px;
+  color: var(--ink);
+  letter-spacing: normal;
+}
+
+.renewal-scope .card .sub {
+  font-size: 12.5px;
+  color: var(--mute);
+  margin: 0 0 20px;
+  min-height: 34px;
+  line-height: 1.5;
+}
+
+.renewal-scope .rows {
+  border-top: 1px solid var(--rule);
+  margin: 0;
+}
+
+.renewal-scope .row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 12px;
+  padding: 11px 0;
+  border-bottom: 1px solid var(--rule);
+}
+
+.renewal-scope .row dt {
+  font-size: 13px;
+  color: var(--graphite);
+}
+
+.renewal-scope .row dd {
+  margin: 0;
+  font-family: var(--serif);
+  font-size: 19px;
+  font-weight: 400;
+  font-variant-numeric: tabular-nums lining-nums;
+  white-space: nowrap;
+}
+
+.renewal-scope .row--headline dd {
+  font-size: 23px;
+  color: var(--violet-deep);
+}
+
+.renewal-scope .row--headline dt {
+  color: var(--ink);
+  font-weight: 500;
+}
+
+.renewal-scope .payoff {
+  margin-top: auto;
+  padding: 22px 0 26px;
+}
+
+.renewal-scope .payoff .label {
+  font-family: var(--sans); /* app global `.label` rule would leak its family */
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--mute);
+  margin-bottom: 6px;
+}
+
+.renewal-scope .payoff .multiple {
+  font-family: var(--serif);
+  font-size: clamp(40px, 5.2vw, 56px);
+  line-height: 1;
+  letter-spacing: -0.02em;
+  font-variant-numeric: tabular-nums lining-nums;
+  color: var(--violet);
+}
+
+.renewal-scope .card--lead .payoff .multiple {
+  background: var(--gradient);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.renewal-scope .payoff .net {
+  font-size: 13px;
+  color: var(--graphite);
+  margin-top: 8px;
+}
+
+/* ---------- Return rail ---------- */
+
+.renewal-scope .rail {
+  margin-top: 44px;
+  background: #fff;
+  border: 1px solid var(--rule);
+  border-radius: 4px;
+  padding: 28px 28px 22px;
+}
+
+.renewal-scope .rail h2 {
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: 22px;
+  margin: 0 0 4px;
+  color: var(--ink);
+  letter-spacing: normal;
+  line-height: 1.5;
+}
+
+.renewal-scope .rail .sub {
+  font-size: 12.5px;
+  color: var(--mute);
+  margin: 0 0 26px;
+  line-height: 1.5;
+}
+
+.renewal-scope .bar-row {
+  display: grid;
+  grid-template-columns: 210px 1fr 150px;
+  align-items: center;
+  gap: 20px;
+  padding: 14px 0;
+  border-top: 1px solid var(--rule);
+}
+
+.renewal-scope .bar-row .name {
+  font-size: 13px;
+  color: var(--ink);
+  font-weight: 500;
+}
+
+.renewal-scope .bar-row .name span {
+  display: block;
+  font-size: 11.5px;
+  color: var(--mute);
+  font-weight: 400;
+}
+
+.renewal-scope .track {
+  position: relative;
+  height: 26px;
+  background: var(--violet-tint);
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.renewal-scope .bar-return {
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 0;
+  background: var(--gradient);
+  border-radius: 0 3px 3px 0;
+  transition: width 0.55s cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+/* Investment bars stay BLACK, not violet — cost and return must read as
+   different things at a glance (handover §5.3). */
+.renewal-scope .bar-invest {
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 0;
+  background: var(--ink);
+  transition: width 0.55s cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+.renewal-scope .bar-row .figure {
+  text-align: right;
+  font-family: var(--serif);
+  font-size: 18px;
+  font-variant-numeric: tabular-nums lining-nums;
+}
+
+.renewal-scope .legend {
+  display: flex;
+  gap: 22px;
+  margin-top: 18px;
+  font-size: 11.5px;
+  color: var(--graphite);
+}
+
+.renewal-scope .legend i {
+  display: inline-block;
+  width: 11px;
+  height: 11px;
+  margin-right: 7px;
+  vertical-align: -1px;
+  border-radius: 2px;
+}
+
+.renewal-scope .legend .k-inv {
+  background: var(--ink);
+}
+
+.renewal-scope .legend .k-ret {
+  background: var(--gradient);
+}
+
+/* ---------- Campaign goals ---------- */
+
+.renewal-scope .goals {
+  margin-top: 20px;
+  background: #fff;
+  border: 1px solid var(--rule);
+  border-radius: 4px;
+  padding: 28px 28px 30px;
+}
+
+.renewal-scope .goals h2 {
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: 22px;
+  margin: 0 0 4px;
+  color: var(--ink);
+  letter-spacing: normal;
+  line-height: 1.5;
+}
+
+.renewal-scope .goals .sub {
+  font-size: 12.5px;
+  color: var(--mute);
+  margin: 0 0 26px;
+  line-height: 1.5;
+}
+
+.renewal-scope .goal {
+  border-left: 3px solid var(--violet);
+  background: var(--violet-tint);
+  border-radius: 0 4px 4px 0;
+  padding: 16px 20px 18px;
+  margin-bottom: 14px;
+}
+
+.renewal-scope .goal:last-child {
+  margin-bottom: 0;
+}
+
+.renewal-scope .goal .q {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--ink);
+  line-height: 1.45;
+  margin: 0;
+}
+
+.renewal-scope .goal .a {
+  font-family: var(--serif);
+  font-size: 20px;
+  line-height: 1.4;
+  color: var(--violet-deep);
+  margin: 9px 0 0;
+}
+
+.renewal-scope .goal .a.empty {
+  font-family: var(--sans);
+  font-size: 13px;
+  color: var(--mute);
+  font-style: italic;
+}
+
+.renewal-scope .fields--stack {
+  grid-template-columns: 1fr;
+}
+
+.renewal-scope .field textarea {
+  width: 100%;
+  font-family: var(--sans);
+  font-size: 15px;
+  line-height: 1.5;
+  color: var(--ink);
+  padding: 9px 11px;
+  border: 1px solid var(--rule-strong);
+  border-radius: 3px;
+  background: #fff;
+  resize: vertical;
+  min-height: 62px;
+}
+
+.renewal-scope .field textarea:hover {
+  border-color: var(--violet-light);
+}
+
+/* ---------- Notes ---------- */
+
+.renewal-scope .notes {
+  margin-top: 30px;
+  padding-top: 18px;
+  border-top: 1px solid var(--rule-strong);
+  font-size: 12px;
+  line-height: 1.7;
+  color: var(--graphite);
+  max-width: 760px;
+}
+
+.renewal-scope .notes strong {
+  color: var(--ink);
+  font-weight: 600;
+}
+
+/* ---------- Past presentations (Vexon OS addition, prep-mode only) ---------- */
+
+.renewal-scope .presentations table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+
+.renewal-scope .presentations td,
+.renewal-scope .presentations th {
+  text-align: left;
+  padding: 8px 12px 8px 0;
+  border-bottom: 1px solid var(--rule);
+  color: var(--graphite);
+}
+
+.renewal-scope .presentations th {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--mute);
+}
+
+.renewal-scope .presentations .fig {
+  font-family: var(--serif);
+  font-variant-numeric: tabular-nums lining-nums;
+  color: var(--ink);
+}
+
+.renewal-scope .presentations button {
+  appearance: none;
+  background: transparent;
+  border: 1px solid var(--rule-strong);
+  border-radius: 3px;
+  font-family: var(--sans);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--violet-deep);
+  padding: 4px 10px;
+  cursor: pointer;
+}
+
+.renewal-scope .presentations button:hover {
+  border-color: var(--violet);
+}
+
+.renewal-scope .snapshot-banner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  background: var(--violet-soft);
+  border: 1px solid var(--rule-strong);
+  border-radius: 3px;
+  padding: 10px 14px;
+  font-size: 12.5px;
+  color: var(--violet-deep);
+  margin-bottom: 26px;
+}
+
+/* ---------- Responsive ---------- */
+
+@media (max-width: 960px) {
+  .renewal-scope .scenarios {
+    grid-template-columns: 1fr;
+  }
+  .renewal-scope .card .sub {
+    min-height: 0;
+  }
+  .renewal-scope .bar-row {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+  .renewal-scope .bar-row .figure {
+    text-align: left;
+  }
+}
+
+@media (max-width: 600px) {
+  .renewal-scope .wrap {
+    padding: 32px 20px 56px;
+  }
+  .renewal-scope .masthead {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+  }
+  .renewal-scope .prepared {
+    text-align: left;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .renewal-scope * {
+    transition: none !important;
+  }
+}
+
+/* ---------- Print / PDF export ---------- */
+/* The artefact's print block, extended so only the renewal page prints
+   inside the app shell: controls, input panel and prep sections drop out. */
+
+@media print {
+  body * {
+    visibility: hidden;
+  }
+  .renewal-scope,
+  .renewal-scope * {
+    visibility: visible;
+  }
+  .renewal-scope {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    background: #fff;
+    border-radius: 0;
+  }
+  .renewal-scope .controls,
+  .renewal-scope .panel,
+  .renewal-scope .prep,
+  .renewal-scope .snapshot-banner {
+    display: none !important;
+  }
+  .renewal-scope .wrap {
+    padding: 0;
+    max-width: none;
+  }
+  .renewal-scope .scenarios {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .renewal-scope .card {
+    break-inside: avoid;
+  }
+  .renewal-scope .card--lead {
+    background: #fff;
+  }
+}
